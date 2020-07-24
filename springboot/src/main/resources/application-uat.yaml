@@ -4,9 +4,9 @@ server:
 spring:
   #数据库配置
   datasource:
-    url: jdbc:mysql://101.132.178.177:3306/springboot_vue?autoReconnect=true&useUnicode=true&characterEncoding=utf8&serverTimezone=UTC&zeroDateTimeBehavior=convertToNull&useSSL=false&nullCatalogMeansCurrent=true
+    url: jdbc:mysql://127.0.0.1:3306/springboot_vue?autoReconnect=true&useUnicode=true&characterEncoding=utf8&serverTimezone=UTC&zeroDateTimeBehavior=convertToNull&useSSL=false&nullCatalogMeansCurrent=true
     username: root
-    password: root
+    password: bqcBQC123
     driver-class-name: com.mysql.cj.jdbc.Driver
     type: com.alibaba.druid.pool.DruidDataSource #切换数据源，如果不写，会使用默认的
     # 以下是DuriDataSource的基本配置，如果不写，使用springboot默认的
@@ -57,7 +57,7 @@ spring:
       time-to-live: 60s
     type: redis
   redis:
-    host: 101.132.178.177
+    host: 127.0.0.1
     port: 6379
     password: bqcBQC123
     timeout: 10000ms
@@ -103,7 +103,7 @@ spring:
   #Activiti property configuration
   activiti:
       #自动更新数据库结构
-      database-schema-update: true
+      database-schema-update: false
       #自动检查、部署流程定义文件
       check-process-definitions: false
       # asyncExecutorActivate是指activiti在流程引擎启动就激活AsyncExecutor,异步：true-开启（默认）、false-关闭
@@ -162,5 +162,5 @@ logging:
 # 自定义配置
 springboot_vue:
   upload:
-    local-upload-path: ${UPLOAD_PATH:E:\Temp\upload}
+    local-upload-path: E:\Temp\upload
     suffix: .jpg,.bmp,.jpeg,.png,.zip,.rar,.xls,.xlsx,.doc,.docx,.pdf,.txt,.ci,.vi,bpmn,xml

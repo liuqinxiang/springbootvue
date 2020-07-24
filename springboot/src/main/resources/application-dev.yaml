@@ -57,7 +57,7 @@ spring:
       time-to-live: 60s
     type: redis
   redis:
-    host: 101.132.178.177
+    host: 127.0.0.1
     port: 6379
     password: bqcBQC123
     timeout: 10000ms
@@ -162,5 +162,5 @@ logging:
 # 自定义配置
 springboot_vue:
   upload:
-    local-upload-path: ${UPLOAD_PATH:E:\Temp\upload}
+    local-upload-path: E:\Temp\upload
     suffix: .jpg,.bmp,.jpeg,.png,.zip,.rar,.xls,.xlsx,.doc,.docx,.pdf,.txt,.ci,.vi,bpmn,xml
