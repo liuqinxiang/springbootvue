@@ -25,7 +25,7 @@ springboot+vue+mysql+redis 前后分离快速开发框架(目前系统初具雏�
   data.sql   是部分数据   
   quartz.sql 是定时任务quarzt的表   
   activiti.sql 是工作流activiti7的表   
-注：activiti7 采用的是自动生成表格 首次启动时需要在配置文件里面设置 database-schema-update: true 改为true即可   
+注：activiti7 也可采用自动生成表格 首次启动时需要在配置文件里面设置 database-schema-update: true 改为true即可   
 2、springboot直接用idea打开即可
 注：
 3、vue 需要执行以下node指令   
