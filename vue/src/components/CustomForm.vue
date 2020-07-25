@@ -49,6 +49,79 @@
                      :disabled="option.disabled">
           </el-option>
         </el-select>
+        <!--图表选择下拉框-->
+        <el-popover v-if="item.type==='icon-select'"
+                    placement="bottom"
+                    width="300"
+                    trigger="click">
+          <el-input slot="reference"
+                    v-model="formModel[item.field]"
+                    :disabled="item.readonly"
+                    readonly="readonly"></el-input>
+          <div ref="iconSelect"
+               class="icon-content">
+            <i class="el-icon-edit"
+               @click="formModel[item.field]='el-icon-edit'"></i>
+            <i class="el-icon-share"
+               @click="formModel[item.field]='el-icon-share'"></i>
+            <i class="el-icon-delete"
+               @click="formModel[item.field]='el-icon-delete'"></i>
+            <i class="el-icon-s-tools"
+               @click="formModel[item.field]='el-icon-s-tools'"></i>
+            <i class="el-icon-setting"
+               @click="formModel[item.field]='el-icon-setting'"></i>
+            <i class="el-icon-user-solid"
+               @click="formModel[item.field]='el-icon-user-solid'"></i>
+            <i class="el-icon-user"
+               @click="formModel[item.field]='el-icon-user'"></i>
+            <i class="el-icon-phone-outline"
+               @click="formModel[item.field]='el-icon-phone-outline'"></i>
+            <i class="el-icon-more-outline"
+               @click="formModel[item.field]='el-icon-more-outline'"></i>
+            <i class="el-icon-star-off"
+               @click="formModel[item.field]='el-icon-star-off'"></i>
+            <i class="el-icon-s-goods"
+               @click="formModel[item.field]='el-icon-s-goods'"></i>
+            <i class="el-icon-warning"
+               @click="formModel[item.field]='el-icon-warning'"></i>
+            <i class="el-icon-question"
+               @click="formModel[item.field]='el-icon-question'"></i>
+            <i class="el-icon-info"
+               @click="formModel[item.field]='el-icon-info'"></i>
+            <i class="el-icon-s-help"
+               @click="formModel[item.field]='el-icon-s-help'"></i>
+            <i class="el-icon-picture"
+               @click="formModel[item.field]='el-icon-picture'"></i>
+            <i class="el-icon-camera-solid"
+               @click="formModel[item.field]='el-icon-camera-solid'"></i>
+            <i class="el-icon-upload"
+               @click="formModel[item.field]='el-icon-upload'"></i>
+            <i class="el-icon-s-cooperation"
+               @click="formModel[item.field]='el-icon-cooperation'"></i>
+            <i class="el-icon-s-promotion"
+               @click="formModel[item.field]='el-icon-s-promotion'"></i>
+            <i class="el-icon-s-platform"
+               @click="formModel[item.field]='el-icon-s-platform'"></i>
+            <i class="el-icon-s-order"
+               @click="formModel[item.field]='el-icon-s-order'"></i>
+            <i class="el-icon-s-management"
+               @click="formModel[item.field]='el-icon-s-management'"></i>
+            <i class="el-icon-s-release"
+               @click="formModel[item.field]='el-icon-s-release'"></i>
+            <i class="el-icon-s-open"
+               @click="formModel[item.field]='el-icon-s-open'"></i>
+            <i class="el-icon-s-check"
+               @click="formModel[item.field]='el-icon-s-check'"></i>
+            <i class="el-icon-menu"
+               @click="formModel[item.field]='el-icon-menu'"></i>
+            <i class="el-icon-s-flag"
+               @click="formModel[item.field]='el-icon-s-flag'"></i>
+            <i class="el-icon-s-comment"
+               @click="formModel[item.field]='el-icon-s-comment'"></i>
+            <i class="el-icon-s-claim"
+               @click="formModel[item.field]='el-icon-s-claim'"></i>
+          </div>
+        </el-popover>
         <!--复选框-->
         <!--日期选择器-->
         <el-date-picker v-if="item.type==='date'"
@@ -196,5 +269,12 @@ export default {
 <style lang="less" scoped>
 .el-form--inline {
   text-align: left;
+}
+.icon-content {
+  i {
+    font-size: 25px;
+    padding: 10px;
+    cursor: pointer;
+  }
 }
 </style>>

@@ -46,7 +46,7 @@
                            label="操作"
                            width="300">
             <template slot-scope="scope">
-              <el-button @click="handleAuthVClick(scope.row)"
+              <el-button @click="handleViewVClick(scope.row)"
                          type="text"
                          size="small">日志查看</el-button>
               <el-button type="text"
@@ -75,7 +75,7 @@
     </el-row>
     <!--列自定义-->
     <CustomTableCols :defaultCols="defaultColumns"
-                     customName="user"
+                     customName="sysSequence"
                      @changeColumns="changeColumns" />
     <!--查询条件-->
     <Search :show.sync="showSearch"
@@ -85,12 +85,83 @@
             @hidden="hidCondition" />
     <!--新增编辑页面-->
     <CustomForm :show.sync="showForm"
-                title="用户编辑"
+                title="流水码编辑"
                 :control="codeControl"
                 :model="codeForm"
                 :rules="codeRules"
                 @ok="saveForm"
                 @hidden="hidForm" />
+    <!--字典子列表页面-->
+    <el-drawer title="流水码日志"
+               :visible.sync="showDrawer"
+               custom-class="demo-drawer"
+               ref="drawer"
+               size="40%">
+      <div class="demo-drawer__content">
+        <div>
+          <!--按钮列表-->
+          <el-button-group class="toolBox">
+            <el-button size="small"
+                       v-for="(item,index) in itemButtonGroups"
+                       :key="index"
+                       @click="dynamicMethod(item.method,item.params)"
+                       :icon="item.icon">{{item.label}}</el-button>
+          </el-button-group>
+        </div>
+        <!--数据表格-->
+        <el-row>
+          <el-col :span="24">
+            <el-table :data="logTableData"
+                      border
+                      stripe
+                      highlight-current-row
+                      ref="multipleItemTable"
+                      :height="logTableHeight"
+                      @row-click="handleItemRowClick"
+                      style="width: 100%">
+              <el-table-column type="selection"
+                               width="55">
+              </el-table-column>
+              <template v-for="(el,i) in itemTableColumns">
+                <el-table-column :label="el.label"
+                                 header-align="center"
+                                 v-if="el.show "
+                                 :width="el.width || ''"
+                                 :key="el.prop"
+                                 :fixed="el.fixed"
+                                 :prop="el.prop"
+                                 :sortable="el.sortable"
+                                 show-overflow-tooltip>
+                </el-table-column>
+              </template>
+            </el-table>
+          </el-col>
+        </el-row>
+        <!--分页插件-->
+        <el-row>
+          <el-col :span="24">
+            <el-pagination @size-change="handleLogSizeChange"
+                           @current-change="handleLogCurrentChange"
+                           :current-page="logCurrent"
+                           :page-sizes="pageSizeOptions"
+                           :page-size="logSize"
+                           layout="total, sizes, prev, pager, next, jumper"
+                           :total="logTotal">
+            </el-pagination>
+          </el-col>
+        </el-row>
+        <!--列自定义-->
+        <CustomTableCols :defaultCols="itemDefaultColumns"
+                         customName="sysSequenceLog"
+                         @changeColumns="itemChangeColumns" />
+        <!--查询条件-->
+        <Search :show.sync="showItemSearch"
+                :condition="searchItemCondition"
+                :form="searchItemForm"
+                @ok="setItemCondition"
+                @hidden="showItemSearch=false" />
+      </div>
+    </el-drawer>
   </div>
 
 </template>
@@ -123,6 +194,7 @@ export default {
       buttonGroups: [
         { index: 0, label: '查询', method: 'showCondition', icon: 'el-icon-search' },
         { index: 1, label: '新建', method: 'addAndEdit', icon: 'el-icon-plus' },
+        // { index: 1, label: '测试', method: 'test', icon: 'el-icon-plus' },
         { index: 5, label: '删除', method: 'delete', icon: 'el-icon-delete' },
         { index: 6, label: '刷新', method: 'searchData', icon: 'el-icon-refresh' }
       ],
@@ -182,7 +254,31 @@ export default {
         ]
       },
       multipleSelection: [],
-      visible: false
+      visible: false,
+      logTableData: [],
+      logTableHeight: '400px',
+      logCurrent: 1,
+      logSize: 10,
+      logTotal: 0,
+      showDrawer: false,
+      sequenceId: null,
+      showItemSearch: false,
+      showItemForm: false,
+      searchItemForm: { createTime: '', createTime: '' },
+      searchItemCondition: [
+        { index: 0, label: '开始时间', field: 'createTime', type: 'input', show: true },
+        { index: 1, label: '结束时间', field: 'createTime', type: 'input', show: true },
+      ],
+      itemButtonGroups: [
+        { index: 0, label: '查询', method: 'showLogCondition', icon: 'el-icon-search' },
+        { index: 3, label: '刷新', method: 'searchLog', icon: 'el-icon-refresh' }
+      ],
+      itemTableColumns: [],
+      itemDefaultColumns: [
+        { label: '流水编码', prop: 'flowCode', show: true, fixed: false, sortable: false, width: 200 },
+        { label: '创建人', prop: 'createBy', show: true, fixed: false, sortable: false, width: 200 },
+        { label: '创建时间', prop: 'createTime', show: true, fixed: false, sortable: false }
+      ],
     }
   },
 
@@ -288,7 +384,18 @@ export default {
       })
     },
     /**
-     * 删除用户
+    * 测试方法
+    */
+    test () {
+      this.$http.post('/api/sysSequence/test', {}).then(res => {
+
+
+      }).catch(err => {
+        console.log(err.message)
+      })
+    },
+    /**
+     * 删除流水码
      */
     handleDelClick (row) {
       // 设置账号栏位不可编辑
@@ -342,7 +449,7 @@ export default {
       this.showForm = val
     },
     /**
-     * 删除用户
+     * 删除流水码
      */
     delete () {
       if (this.$refs.multipleTable.selection.length <= 0) {
@@ -373,6 +480,55 @@ export default {
       })
     },
     /**
+  * 日志自定义列
+  */
+    itemChangeColumns (val) {
+      console.log('changeColumns--' + val)
+      this.itemTableColumns = []
+      this.$nextTick(() => {
+        this.itemTableColumns = val
+      })
+    },
+    // 字典子项点击行触发，选中或不选中复选框
+    handleItemRowClick (row, column, event) {
+      this.$refs.multipleItemTable.toggleRowSelection(row)
+    },
+    /**
+     * 数据查询
+     */
+    handleViewVClick (row) {
+      this.sequenceId = row.id;
+      this.showDrawer = true;
+      this.searchLog();
+    },
+    /**
+     * 字典子项查询页面
+    */
+    showLogCondition () {
+      this.showItemSearch = true
+    },
+    /**
+     * 日志查询
+     */
+    searchLog () {
+      this.$http.get('/api/sysSequenceLog/list', {
+        params: {
+          sequenceId: this.sequenceId
+        }
+      }).then(res => {
+        if (res.code == '0') {
+          this.logTableData = res.data.records
+          this.logTotal = res.data.total
+          this.logCurrent = res.data.current
+          this.logSize = res.data.size
+        } else {
+          this.$message.error(res.msg)
+        }
+      }).catch(err => {
+        console.log(err.message)
+      })
+    },
+    /**
      * 自定义列修改
      */
     changeColumns (val) {
@@ -391,12 +547,35 @@ export default {
       this.searchData()
     },
     /**
+   * 设置查询条件
+   */
+    setItemCondition (from) {
+      const newData = JSON.parse(JSON.stringify(from))
+      this.searchItemForm = newData
+    },
+    /**
      * table页数变化
      */
     handleCurrentChange (val) {
       console.log(`当前页: ${val}`)
       this.current = val
       this.searchData()
+    },
+    /**
+  * table每页数字变化
+  */
+    handleLogSizeChange (val) {
+      console.log(`每页 ${val} 条`)
+      this.LogSize = val
+      this.searchLog()
+    },
+    /**
+     * table页数变化
+     */
+    handleLogCurrentChange (val) {
+      console.log(`当前页: ${val}`)
+      this.LogCurrent = val
+      this.searchLog()
     }
   },
   created () {

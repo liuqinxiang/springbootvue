@@ -3,6 +3,7 @@ package org.dev.framework.modules.sys.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import org.dev.framework.exception.CustomException;
 import org.dev.framework.modules.sys.entity.SysSequence;
 import org.dev.framework.modules.sys.service.SysSequenceService;
 import org.dev.framework.common.PaginAtion;
@@ -10,6 +11,7 @@ import org.dev.framework.common.ResponseResult;
 import org.dev.framework.core.aop.OperLog;
 import org.dev.framework.modules.sys.entity.SysSequence;
 import org.dev.framework.modules.sys.service.SysSequenceService;
+import org.dev.framework.modules.sys.util.SequenceUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
@@ -29,6 +31,10 @@ import java.util.List;
 public class SysSequenceController {
     @Autowired
     SysSequenceService sysSequenceService;
+
+    @Autowired
+    SequenceUtil sequenceUtil;
+
     /**
      * 流水码集合
      *
@@ -84,6 +90,18 @@ public class SysSequenceController {
     public ResponseResult<String> delete(@RequestBody List<Long> ids) {
         this.sysSequenceService.removeByIds(ids);
         return ResponseResult.success();
+    }
+
+    /**
+     * 测试
+     */
+
+    @PostMapping("/test")
+    public void test() throws CustomException {
+        for (int i = 0; i < 100; i++) {
+            sequenceUtil.GeneratorCode("FLOW_CODE");
+            sequenceUtil.GeneratorCode("FLOW_CODE", "P");
+        }
     }
 }
 

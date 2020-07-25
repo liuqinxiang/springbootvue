@@ -38,7 +38,8 @@ import {
   Dialog,
   Drawer,
   Upload,
-  Option
+  Option,
+  Popover
 } from 'element-ui'
 
 Vue.use(Button)
@@ -79,6 +80,7 @@ Vue.use(Loading)
 Vue.use(Loading.directive)
 Vue.use(Upload)
 Vue.use(Option)
+Vue.use(Popover)
 Vue.prototype.$loading = Loading.service
 Vue.prototype.$msgbox = MessageBox
 Vue.prototype.$alert = MessageBox.alert

@@ -37,4 +37,5 @@ public class MetaHandler implements MetaObjectHandler {
         this.setFieldValByName("updateBy", JwtUtil.CurrentUserId(), metaObject);
         this.setFieldValByName("updateTime", new Date(), metaObject);
     }
+
 }

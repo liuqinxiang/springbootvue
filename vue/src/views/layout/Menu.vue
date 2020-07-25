@@ -1,7 +1,7 @@
 
 <template>
-  <el-menu background-color="#333744"
-           text-color="#fff"
+  <el-menu background-color="#FFFFFF"
+           text-color="#000000"
            active-text-color="#409BFF"
            :unique-opened="true"
            :collapse="isCollapse"
@@ -87,4 +87,10 @@ export default {
     isCollapse: false
   }
 }
-</script>
+</script> 
+<style lang="less" scoped>
+.el-menu-item.is-active {
+  color: #409eff;
+  border-right: #409eff solid 3px;
+}
+</style>

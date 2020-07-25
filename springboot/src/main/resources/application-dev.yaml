@@ -57,7 +57,7 @@ spring:
       time-to-live: 60s
     type: redis
   redis:
-    host: 127.0.0.1
+    host: 101.132.178.177
     port: 6379
     password: bqcBQC123
     timeout: 10000ms
