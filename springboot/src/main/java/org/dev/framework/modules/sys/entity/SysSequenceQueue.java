@@ -1,5 +1,6 @@
 package org.dev.framework.modules.sys.entity;
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import org.dev.framework.core.entity.TenantEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -38,7 +39,11 @@ public class SysSequenceQueue extends TenantEntity {
     /**
      * 当前数值
      */
-    private Long currentValue;
+    private Integer currentValue;
 
-
+    /**
+     * 当前数值
+     */
+    @TableField("`current_date`")
+    private String currentDate;
 }

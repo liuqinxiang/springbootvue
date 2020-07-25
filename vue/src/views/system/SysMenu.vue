@@ -109,7 +109,7 @@
               </el-row>
               <!--列自定义-->
               <CustomTableCols :defaultCols="defaultColumns"
-                               customName="user"
+                               customName="sysfunc"
                                @changeColumns="changeColumns" />
             </el-tab-pane>
           </el-tabs>
@@ -185,7 +185,7 @@ export default {
         { label: '菜单代码', field: 'menuCode', type: 'input', show: true, readonly: true },
         { label: '菜单名称', field: 'menuName', type: 'input', show: true, readonly: false },
         { label: '菜单地址', field: 'menuUrl', type: 'input', show: true, readonly: false },
-        { label: '菜单图标', field: 'menuIcon', type: 'input', show: true, readonly: false },
+        { label: '菜单图标', field: 'menuIcon', type: 'icon-select', show: true, readonly: false, options: [{ value: '' }] },
         { label: '父级菜单', field: 'parentId', type: 'input', show: true, readonly: true },
         { label: '菜单排序', field: 'sortNo', type: 'input', show: true, readonly: false }
       ],

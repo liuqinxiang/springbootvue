@@ -32,13 +32,13 @@
 // 引入相关的依赖
 // import BpmnViewer from 'bpmn-js'
 import BpmnModeler from 'bpmn-js/lib/Modeler'
-// import propertiesPanelModule from 'bpmn-js-properties-panel-activiti'
-import propertiesPanelModule from 'bpmn-js-properties-panel'
+import propertiesPanelModule from 'bpmn-js-properties-panel-activiti'
+//import propertiesPanelModule from 'bpmn-js-properties-panel'
 // import activitiModdleDescriptor from '../../plugins/activiti.json'
-// import propertiesProviderModule from 'bpmn-js-properties-panel-activiti/lib/provider/activiti'
-import propertiesProviderModule from 'bpmn-js-properties-panel/lib/provider/camunda'
-// import camundaModdleDescriptor from 'activiti-bpmn-moddle/resources/activiti'
-import camundaModdleDescriptor from 'camunda-bpmn-moddle/resources/camunda'
+import propertiesProviderModule from 'bpmn-js-properties-panel-activiti/lib/provider/activiti'
+//import propertiesProviderModule from 'bpmn-js-properties-panel/lib/provider/camunda'
+import camundaModdleDescriptor from 'activiti-bpmn-moddle/resources/activiti'
+//import camundaModdleDescriptor from 'camunda-bpmn-moddle/resources/camunda'
 import customTranslate from '../../plugins/translate/customTranslate'
 // import activitiExtensionModule from 'activiti-bpmn-moddle/lib'
 // import activitiModdle from 'activiti-bpmn-moddle/resources/activiti'
@@ -166,15 +166,15 @@ export default {
 
 <style lang="less" scoped>
 /*左边工具栏以及编辑节点的样式*/
-@import '~bpmn-js/dist/assets/diagram-js.css';
-@import '~bpmn-js/dist/assets/bpmn-font/css/bpmn.css';
-@import '~bpmn-js/dist/assets/bpmn-font/css/bpmn-codes.css';
-@import '~bpmn-js/dist/assets/bpmn-font/css/bpmn-embedded.css';
+@import "~bpmn-js/dist/assets/diagram-js.css";
+@import "~bpmn-js/dist/assets/bpmn-font/css/bpmn.css";
+@import "~bpmn-js/dist/assets/bpmn-font/css/bpmn-codes.css";
+@import "~bpmn-js/dist/assets/bpmn-font/css/bpmn-embedded.css";
 .flow-container {
   display: flex;
 }
 /*右边工具栏样式*/
-@import '~bpmn-js-properties-panel/dist/assets/bpmn-js-properties-panel.css';
+@import "~bpmn-js-properties-panel/dist/assets/bpmn-js-properties-panel.css";
 .containers {
   position: absolute;
   background-color: #ffffff;

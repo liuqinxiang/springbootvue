@@ -90,7 +90,7 @@ export default {
   }
 }
 .el-aside {
-  background-color: #333744;
+  background-color:white;
   .el-menu {
     border-right: none;
     text-align: left;
@@ -101,13 +101,15 @@ export default {
   padding: 10px;
 }
 .toggle-button {
-  background-color: #4a5064;
+  background-color: white;
   font-size: 10px;
   line-height: 24px;
-  color: #fff;
+  color: #000000;
   text-align: center;
   letter-spacing: 0.2em;
   cursor: pointer;
+  border-top:solid 1px #cccccc;
+  border-bottom:solid 1px #cccccc;
 }
 .el-tabs__header {
   background-color: red !important;
