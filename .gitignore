@@ -30,7 +30,6 @@ target/
 .idea/
 #忽略所有.iml文件
 *.iml
-
 .DS_Store
 node_modules/
 platforms/
