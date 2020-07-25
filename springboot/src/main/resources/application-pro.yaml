@@ -157,8 +157,8 @@ mybatis-plus:
 #日志
 logging:
       level:
-        org.lqx.framework.modules.**.mapper: DEBUG
-        org.lqx.framework.modules: INFO
+        org.dev.framework.modules.**.mapper: DEBUG
+        org.dev.framework.modules: INFO
 # 自定义配置
 springboot_vue:
   upload:
